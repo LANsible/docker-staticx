@@ -19,6 +19,9 @@ matrix:
     # arm64
     - env: VERSION=${TRAVIS_TAG:master} ARCH=arm64
 
+    # i386
+    - env: VERSION=${TRAVIS_TAG:master} ARCH=i386
+
 before_script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   # Pipe to true since the tag could be non existing
@@ -26,6 +29,12 @@ before_script:
   - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest || true
 
 script:
+  # Needed for naming difference between manifest-tool and Alpine multiarch image
+  - if [ "${ARCH}" == '386' ]; then
+      ALPINE_ARCH=i386;
+    else
+      ALPINE_ARCH="${ARCH}";
+    fi
   # Prepend version with v when a release is build
   - if [ "${VERSION}" =! "master" ]; then
       VERSION="v${VERSION}";
