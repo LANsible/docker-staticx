@@ -35,10 +35,6 @@ script:
     else
       ALPINE_ARCH="${ARCH}";
     fi
-  # Prepend version with v when a release is build
-  - if [ "${VERSION}" =! "master" ]; then
-      VERSION="v${VERSION}";
-    fi
   # Build StaticX container
   - docker build .
       --build-arg ARCH=${ARCH}
