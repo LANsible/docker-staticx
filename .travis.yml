@@ -14,13 +14,13 @@ services:
 matrix:
   include:
     # amd64
-    - env: VERSION=${TRAVIS_TAG:master} ARCH=amd64
+    - env: VERSION=${TRAVIS_TAG:-master} ARCH=amd64
 
     # arm64
-    - env: VERSION=${TRAVIS_TAG:master} ARCH=arm64
+    - env: VERSION=${TRAVIS_TAG:-master} ARCH=arm64
 
     # i386
-    - env: VERSION=${TRAVIS_TAG:master} ARCH=i386
+    - env: VERSION=${TRAVIS_TAG:-master} ARCH=i386
 
 before_script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
