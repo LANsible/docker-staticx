@@ -37,7 +37,7 @@ script:
     fi
   # Build StaticX container
   - docker build .
-      --build-arg ARCH=${ARCH}
+      --build-arg ARCH=${ALPINE_ARCH}
       --build-arg VERSION=${VERSION}
       --cache-from ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:latest
       --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${VERSION}-${ARCH}
